@@ -28,7 +28,7 @@
     /**
      * @param {CanvasRenderingContext2D} context
      */
-    function PrimitiveBrush(context) {
+    function PrimitiveBrush(context, pressure) {
         if (!(context instanceof CanvasRenderingContext2D)) {
             throw new Error('No 2D rendering context given!');
         }
@@ -42,7 +42,6 @@
 
         // init context
         this.ctx.strokeStyle = '#f00';
-        this.ctx.lineWidth = '3';
         this.ctx.lineCap = this.ctx.lineJoin = 'round';
     }
 
@@ -73,10 +72,13 @@
         }
         var x = event.clientX - offsetX;
         var y = event.clientY - offsetY;
+        this.ctx.lineWidth = event.pressure * 2;
         this.workingStrokes.push({
             x: x,
             y: y
         });
+        const pressure = document.getElementById('pressure');
+        pressure.innerHTML = event.pressure;
         requestAnimationFrame(this._draw.bind(this));
     };
 
@@ -124,9 +126,9 @@
     // Set up brush to listen to events
     var brush = new PrimitiveBrush(canvas.getContext('2d'));
 
-    canvas.addEventListener('mousedown', brush.start.bind(brush));
-    canvas.addEventListener('mousemove', brush.move.bind(brush));
-    canvas.addEventListener('mouseup', brush.end.bind(brush));
+    // canvas.addEventListener('mousedown', brush.start.bind(brush));
+    // canvas.addEventListener('mousemove', brush.move.bind(brush));
+    // canvas.addEventListener('mouseup', brush.end.bind(brush));
 
     canvas.addEventListener('pointerdown', brush.start.bind(brush));
     canvas.addEventListener('pointermove', brush.move.bind(brush));
