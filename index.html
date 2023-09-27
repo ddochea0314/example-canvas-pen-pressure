@@ -71,6 +71,7 @@
      * @param  {MouseEvent} event
      */
     PrimitiveBrush.prototype.move = function (event) {
+        document.getElementById('log').innerHTML +=  event.pressure + '<br />';
         if (!this.isTouching || !event.pressure || event.pressure === 0) {
             return;
         }
@@ -83,7 +84,6 @@
         });
         const pressure = document.getElementById('pressure');
         pressure.innerHTML = event.pressure;
-        document.getElementById('log').innerHTML +=  event.pressure + '<br />';
         requestAnimationFrame(this._draw.bind(this));
     };
 
@@ -139,10 +139,7 @@
     canvas.addEventListener('pointerdown', brush.start.bind(brush));
     canvas.addEventListener('pointermove', brush.move.bind(brush));
     canvas.addEventListener('pointerup', brush.end.bind(brush));
-
-    canvas.addEventListener('touchstart', brush.start.bind(brush));
-    canvas.addEventListener('touchmove', brush.move.bind(brush));
-    canvas.addEventListener('touchend', brush.end.bind(brush));
+    canva
 
 </script>
 
