@@ -128,6 +128,10 @@
     canvas.addEventListener('mousemove', brush.move.bind(brush));
     canvas.addEventListener('mouseup', brush.end.bind(brush));
 
+    canvas.addEventListener('pointerdown', brush.start.bind(brush));
+    canvas.addEventListener('pointermove', brush.move.bind(brush));
+    canvas.addEventListener('pointerup', brush.end.bind(brush));
+
 </script>
 
 </html>
