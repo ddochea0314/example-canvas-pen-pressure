@@ -10,7 +10,7 @@
 </head>
 
 <body style="background-color: black;">
-    <div id="log" style="background:wheat;width:200px;height:100%;position:absolute;right:0;top:0;overflow: auto;">
+    <div id="log" style="background:wheat;width:500px;height:100%;position:absolute;right:0;top:0;overflow: auto;">
         <p>Pressure: <span id="pressure"></span></p>
     </div>
     <canvas id="drawing" width="500" height="500">
@@ -69,7 +69,7 @@
      */
     PrimitiveBrush.prototype.move = function (event) {
         event.preventDefault();
-        document.getElementById('pressure').innerHTML = event.pressure;
+        document.getElementById('pressure').innerHTML = `${new Date()} ${event.pressure}` ;
         if (!this.isTouching || !event.pressure || event.pressure === 0) {
             return;
         }
