@@ -2,6 +2,7 @@
 <html>
     <!-- https://stackoverflow.com/questions/21930514/speeding-up-html5-canvas-brush-drawing-onmousemove -->
     <!-- https://jsfiddle.net/m1erickson/wAGcL/ -->
+    <!-- s-pen 선끊김 현상 해결 방법(touch-action: none) : https://stackoverflow.com/questions/49299496/html5-pointermove-touchmove-not-working-in-microsoft-edge -->
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
@@ -75,7 +76,7 @@
         }
         var x = event.clientX - offsetX;
         var y = event.clientY - offsetY;
-        this.ctx.lineWidth = event.pressure;
+        this.ctx.lineWidth = (event.pressure^1.5) * 10;
         this.workingStrokes.push({
             x: x,
             y: y
