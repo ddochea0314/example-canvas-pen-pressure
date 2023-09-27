@@ -10,11 +10,15 @@
 </head>
 
 <body style="background-color: black;">
+    <div id="log" style="background:wheat;width:200px;height:100%;position:absolute;right:0;top:0;">
+
+    </div>
     <canvas id="drawing" width="500" height="500">
 
     </canvas>
     <div style="width:100%;height:30px;background-color: wheat;">
         <p>Pressure: <span id="pressure"></span></p>
+       
     </div>
 </body>
 <script>
@@ -88,6 +92,7 @@
      */
     PrimitiveBrush.prototype.end = function (event, foo) {
         this.move(event);
+        document.getElementById('log').innerHTML = 'end<br />';
         this.isTouching = false;
     };
 
@@ -110,9 +115,9 @@
         this.ctx.beginPath();
 
         this.ctx.moveTo(pt0.x, pt0.y);
-
+        document.getElementById('log').innerHTML += 'drawing<br />';
         for (var j = startIndex; j < this.lastLength; j++) {
-
+            
             var pt = this.workingStrokes[j];
 
             this.ctx.lineTo(pt.x, pt.y);
@@ -133,6 +138,10 @@
     canvas.addEventListener('pointerdown', brush.start.bind(brush));
     canvas.addEventListener('pointermove', brush.move.bind(brush));
     canvas.addEventListener('pointerup', brush.end.bind(brush));
+
+    canvas.addEventListener('touchstart', brush.start.bind(brush));
+    canvas.addEventListener('touchmove', brush.move.bind(brush));
+    canvas.addEventListener('touchend', brush.end.bind(brush));
 
 </script>
 
