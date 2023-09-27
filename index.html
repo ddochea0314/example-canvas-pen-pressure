@@ -11,15 +11,11 @@
 
 <body style="background-color: black;">
     <div id="log" style="background:wheat;width:200px;height:100%;position:absolute;right:0;top:0;overflow: auto;">
-
+        <p>Pressure: <span id="pressure"></span></p>
     </div>
     <canvas id="drawing" width="500" height="500">
 
     </canvas>
-    <div style="width:100%;height:30px;background-color: wheat;">
-        <p>Pressure: <span id="pressure"></span></p>
-       
-    </div>
 </body>
 <script>
     // get reference to canvas and save canvas offsets
@@ -73,7 +69,7 @@
      */
     PrimitiveBrush.prototype.move = function (event) {
         event.preventDefault();
-        document.getElementById('log').innerHTML +=  event.pressure + '<br />';
+        document.getElementById('pressure').innerHTML = event.pressure;
         if (!this.isTouching || !event.pressure || event.pressure === 0) {
             return;
         }
@@ -84,8 +80,6 @@
             x: x,
             y: y
         });
-        const pressure = document.getElementById('pressure');
-        pressure.innerHTML = event.pressure;
         requestAnimationFrame(this._draw.bind(this));
     };
 
@@ -96,7 +90,6 @@
     PrimitiveBrush.prototype.end = function (event) {
         event.preventDefault();
         this.move(event);
-        document.getElementById('log').innerHTML = 'end<br />';
         this.isTouching = false;
     };
 
@@ -119,7 +112,6 @@
         this.ctx.beginPath();
 
         this.ctx.moveTo(pt0.x, pt0.y);
-        document.getElementById('log').innerHTML += 'drawing<br />';
         for (var j = startIndex; j < this.lastLength; j++) {
             
             var pt = this.workingStrokes[j];
