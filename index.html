@@ -67,12 +67,12 @@
      * @param  {MouseEvent} event
      */
     PrimitiveBrush.prototype.move = function (event) {
-        if (!this.isTouching) {
+        if (!this.isTouching || !event.pressure || event.pressure === 0) {
             return;
         }
         var x = event.clientX - offsetX;
         var y = event.clientY - offsetY;
-        this.ctx.lineWidth = event.pressure * 2;
+        this.ctx.lineWidth = event.pressure;
         this.workingStrokes.push({
             x: x,
             y: y
