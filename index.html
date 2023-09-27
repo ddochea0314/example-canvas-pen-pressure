@@ -83,6 +83,7 @@
         });
         const pressure = document.getElementById('pressure');
         pressure.innerHTML = event.pressure;
+        document.getElementById('log').innerHTML +=  event.pressure + '<br />';
         requestAnimationFrame(this._draw.bind(this));
     };
 
