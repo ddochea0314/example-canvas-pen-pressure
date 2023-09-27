@@ -10,7 +10,7 @@
 </head>
 
 <body style="background-color: black;">
-    <div id="log" style="background:wheat;width:200px;height:100%;position:absolute;right:0;top:0;">
+    <div id="log" style="background:wheat;width:200px;height:100%;position:absolute;right:0;top:0;overflow: auto;">
 
     </div>
     <canvas id="drawing" width="500" height="500">
@@ -54,6 +54,7 @@
      * @param  {MouseEvent} event
      */
     PrimitiveBrush.prototype.start = function (event) {
+        event.preventDefault();
         var x = event.clientX - offsetX;
         var y = event.clientY - offsetY;
         this.workingStrokes = [{
@@ -71,6 +72,7 @@
      * @param  {MouseEvent} event
      */
     PrimitiveBrush.prototype.move = function (event) {
+        event.preventDefault();
         document.getElementById('log').innerHTML +=  event.pressure + '<br />';
         if (!this.isTouching || !event.pressure || event.pressure === 0) {
             return;
@@ -91,7 +93,8 @@
      * Stops a stroke
      * @param  {MouseEvent} event
      */
-    PrimitiveBrush.prototype.end = function (event, foo) {
+    PrimitiveBrush.prototype.end = function (event) {
+        event.preventDefault();
         this.move(event);
         document.getElementById('log').innerHTML = 'end<br />';
         this.isTouching = false;
