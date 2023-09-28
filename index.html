@@ -76,7 +76,7 @@
         }
         var x = event.clientX - offsetX;
         var y = event.clientY - offsetY;
-        this.ctx.lineWidth = (event.pressure^1.5) * 10;
+        this.ctx.lineWidth = event.pressure * 10;
         this.workingStrokes.push({
             x: x,
             y: y
